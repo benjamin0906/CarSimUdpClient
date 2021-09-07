@@ -20,14 +20,14 @@
       <item>
        <widget class="QPushButton" name="EngagePushButton">
         <property name="text">
-         <string>PushButton</string>
+         <string>Engage</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="EngagedLabel">
         <property name="text">
-         <string>TextLabel</string>
+         <string/>
         </property>
        </widget>
       </item>
