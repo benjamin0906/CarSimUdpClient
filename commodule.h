@@ -6,6 +6,9 @@
 #include <QUdpSocket>
 #include <QTimer>
 
+#define GET_STATE_PERIOD        50
+#define SET_REFERENCE_PERIOD    100
+
 enum eMsgType
 {
     Msg_StateReq,

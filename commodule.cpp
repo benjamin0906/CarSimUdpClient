@@ -10,7 +10,7 @@ ComModule::ComModule(QString SrcIp, unsigned int SrcPort, QString DstIp, unsigne
 
     StateTimer = new QTimer();
     connect(StateTimer, SIGNAL(timeout()), this, SLOT(QuerrySimState()));
-    StateTimer->start(100);
+    StateTimer->start(GET_STATE_PERIOD);
 
     RefTimer = new QTimer();
     connect(RefTimer, SIGNAL(timeout()), this, SLOT(SendRefs()));
@@ -25,7 +25,7 @@ void ComModule::EngageReq(void)
     Data[2] = 1;
     socket->writeDatagram(Data, *Dst, DstPort);
     IncSeqCntr();
-    RefTimer->start(100);
+    RefTimer->start(SET_REFERENCE_PERIOD);
 }
 
 void ComModule::DisengageReq(void)
@@ -42,9 +42,11 @@ void ComModule::DisengageReq(void)
 
 ComModule::~ComModule()
 {
+    delete(socket);
     delete(Src);
     delete(Dst);
     delete(StateTimer);
+    delete(RefTimer);
 }
 
 void ComModule::IncSeqCntr(void)
@@ -114,7 +116,6 @@ void ComModule::SendRefs(void)
 void ComModule::SetRefVelo(int Velo)
 {
     RefVelo = roundf((float)Velo*250/9);
-    qDebug() << "Velo: " << RefVelo;
 }
 
 void ComModule::SetRefSWA(int SWA)

@@ -91,6 +91,9 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="digitCount">
+             <number>4</number>
+            </property>
            </widget>
           </item>
           <item>
@@ -108,7 +111,11 @@ km/h</string>
            </widget>
           </item>
           <item>
-           <widget class="QLCDNumber" name="RefSWALcd"/>
+           <widget class="QLCDNumber" name="RefSWALcd">
+            <property name="digitCount">
+             <number>4</number>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="RefSWALabel">
@@ -129,7 +136,11 @@ SWA</string>
         <item>
          <layout class="QHBoxLayout" name="CurrLcdHorLay">
           <item>
-           <widget class="QLCDNumber" name="CurrVeloLcd"/>
+           <widget class="QLCDNumber" name="CurrVeloLcd">
+            <property name="digitCount">
+             <number>4</number>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="CurrVeloLabel">
@@ -145,7 +156,11 @@ SWA</string>
            </widget>
           </item>
           <item>
-           <widget class="QLCDNumber" name="CurrSWALcd"/>
+           <widget class="QLCDNumber" name="CurrSWALcd">
+            <property name="digitCount">
+             <number>4</number>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="CurrSWALabel">
