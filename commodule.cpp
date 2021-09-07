@@ -8,9 +8,12 @@ ComModule::ComModule(QString SrcIp, unsigned int SrcPort, QString DstIp, unsigne
     Dst = new QHostAddress(DstIp);
     socket->bind(*Src, SrcPort);
 
-    Timer = new QTimer();
-    connect(Timer, SIGNAL(timeout()), this, SLOT(QuerrySimState()));
-    Timer->start(1000);
+    StateTimer = new QTimer();
+    connect(StateTimer, SIGNAL(timeout()), this, SLOT(QuerrySimState()));
+    StateTimer->start(100);
+
+    RefTimer = new QTimer();
+    connect(RefTimer, SIGNAL(timeout()), this, SLOT(SendRefs()));
 }
 
 void ComModule::EngageReq(void)
@@ -22,6 +25,7 @@ void ComModule::EngageReq(void)
     Data[2] = 1;
     socket->writeDatagram(Data, *Dst, DstPort);
     IncSeqCntr();
+    RefTimer->start(100);
 }
 
 void ComModule::DisengageReq(void)
@@ -33,13 +37,14 @@ void ComModule::DisengageReq(void)
     Data[2] = 0;
     socket->writeDatagram(Data, *Dst, DstPort);
     IncSeqCntr();
+    RefTimer->stop();
 }
 
 ComModule::~ComModule()
 {
     delete(Src);
     delete(Dst);
-    delete(Timer);
+    delete(StateTimer);
 }
 
 void ComModule::IncSeqCntr(void)
@@ -90,4 +95,29 @@ void ComModule::QuerrySimState(void)
         emit UpdateSWA((double)RawSWA/M_PI*180/1000);
     }
     IncSeqCntr();
+}
+
+void ComModule::SendRefs(void)
+{
+    /* Building the data */
+    QByteArray Data(6, 0);
+    Data[0] = Msg_SetRef;
+    Data[1] = SeqCntr;
+    Data[2] = (unsigned char)(RefVelo>>8);
+    Data[3] = (unsigned char)(RefVelo&0xFF);
+    Data[4] = (unsigned char)(RefSWA>>8);
+    Data[5] = (unsigned char)(RefSWA&0xFF);
+    socket->writeDatagram(Data, *Dst, DstPort);
+    IncSeqCntr();
+}
+
+void ComModule::SetRefVelo(int Velo)
+{
+    RefVelo = roundf((float)Velo*250/9);
+    qDebug() << "Velo: " << RefVelo;
+}
+
+void ComModule::SetRefSWA(int SWA)
+{
+    RefSWA = roundf((float)SWA*M_PI/180*1000);
 }

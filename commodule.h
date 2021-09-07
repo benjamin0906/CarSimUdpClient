@@ -28,15 +28,23 @@ signals:
     void UpdateVelo(double Velo);
     void UpdateLabel(QString Text);
 
+public slots:
+    void SetRefVelo(int Velo);
+    void SetRefSWA(int SWA);
+
 private slots:
     void QuerrySimState(void);
+    void SendRefs(void);
 private:
     unsigned char SeqCntr = 1;
     QUdpSocket *socket;
     QHostAddress *Src;
     QHostAddress *Dst;
     unsigned int DstPort;
-    QTimer *Timer;
+    QTimer *StateTimer;
+    QTimer *RefTimer;
+    int RefVelo;
+    int RefSWA;
 
     void IncSeqCntr(void);
 

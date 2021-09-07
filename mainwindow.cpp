@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
     Com = new ComModule("192.168.0.10", 9999, "192.168.0.2", 9999);
     connect(ui->VeloSlider, SIGNAL(valueChanged(int)), ui->RefVeloLcd, SLOT(display(int)));
     connect(ui->SWADegreeSlider, SIGNAL(valueChanged(int)), ui->RefSWALcd, SLOT(display(int)));
+    connect(ui->VeloSlider, SIGNAL(valueChanged(int)), Com, SLOT(SetRefVelo(int)));
+    connect(ui->SWADegreeSlider, SIGNAL(valueChanged(int)), Com, SLOT(SetRefSWA(int)));
     connect(Com, SIGNAL(UpdateVelo(double)), ui->CurrVeloLcd, SLOT(display(double)));
     connect(Com, SIGNAL(UpdateSWA(double)), ui->CurrSWALcd, SLOT(display(double)));
     connect(Com, SIGNAL(UpdateLabel(QString)), ui->EngagedLabel, SLOT(setText(QString)));
