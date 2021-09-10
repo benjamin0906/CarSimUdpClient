@@ -1,14 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget *parent, QHostAddress *ServerIp)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->EngagedLabel->setText("Disengaged");
 
-    Com = new ComModule("192.168.0.10", 9999, "192.168.0.2", 9999);
+    Com = new ComModule("0.0.0.0", 9999, *ServerIp, 9999);
     connect(ui->VeloSlider, SIGNAL(valueChanged(int)), ui->RefVeloLcd, SLOT(display(int)));
     connect(ui->SWADegreeSlider, SIGNAL(valueChanged(int)), ui->RefSWALcd, SLOT(display(int)));
     connect(ui->VeloSlider, SIGNAL(valueChanged(int)), Com, SLOT(SetRefVelo(int)));
@@ -26,8 +26,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_EngagePushButton_clicked()
 {
-    qDebug() << "button is pushed";
-
     if(Engaged == false)
     {
         Engaged = true;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 5.0.0, 2021-09-07T19:05:19. -->
+<!-- Written by QtCreator 5.0.0, 2021-09-10T18:16:49. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -242,6 +242,7 @@
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/Benjamin/Documents/CarSimUdpClient/CarSimUdpClient.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/Benjamin/Documents/CarSimUdpClient/CarSimUdpClient.pro</value>
+    <value type="QString" key="RunConfiguration.Arguments">192.168.0</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

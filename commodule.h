@@ -21,7 +21,7 @@ class ComModule : public QObject
 {
     Q_OBJECT
 public:
-    ComModule(QString SrcIp, unsigned int SrcPort, QString DstIp, unsigned int DstPort);
+    ComModule(QString SrcIp, unsigned int SrcPort, QHostAddress &DstIp, unsigned int DstPort);
     void EngageReq(void);
     void DisengageReq(void);
     ~ComModule();

@@ -4,8 +4,26 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return a.exec();
+    if(argc == 2)
+    {
+        QString StrIp(argv[1]);
+        QHostAddress *Ip = new QHostAddress(StrIp);
+        if(StrIp == Ip->toString())
+        {
+            QApplication a(argc, argv);
+            MainWindow w(nullptr, Ip);
+            w.show();
+            return a.exec();
+        }
+        else
+        {
+            qDebug() << "The argument is not an IP";
+            return -2;
+        }
+    }
+    else
+    {
+        qDebug() << "One and only one argument is needed";
+        return -1;
+    }
 }

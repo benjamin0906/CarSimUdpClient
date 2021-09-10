@@ -1,6 +1,6 @@
 #include "commodule.h"
 
-ComModule::ComModule(QString SrcIp, unsigned int SrcPort, QString DstIp, unsigned int DstPort)
+ComModule::ComModule(QString SrcIp, unsigned int SrcPort, QHostAddress &DstIp, unsigned int DstPort)
 {
     socket = new QUdpSocket();
     this->DstPort = DstPort;
