@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        qDebug() << "One and only one argument is needed";
+        qDebug() << "One and only one argument is needed which is the IP of the server";
         return -1;
     }
 }
